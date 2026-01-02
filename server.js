@@ -1,2 +1,3 @@
-const app = require('./app');
-app.listen(3000, () => console.log('Server running'));
+app.listen(3010, '0.0.0.0', () => {
+  console.log('Server running on port 3010');
+});
