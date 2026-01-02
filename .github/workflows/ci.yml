@@ -46,9 +46,9 @@ jobs:
         run: k6 run loadtest.js
 
       - name: Docker Login
-        if: ${{ secrets.docker login -u ankitkashyap845438 != '' && secrets.DOCKER_TOKEN != '' }}
+        if: ${{ secrets.docker login -u ankitkashyap845438 != '' && secrets.Ankit84@@ != '' }}
         run: |
-            echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.docker login -u ankitkashyap845438 }}" --password-stdin
+            echo "${{ secrets.Ankit84@@ }}" | docker login -u "${{ secrets.docker login -u ankitkashyap845438 }}" --password-stdin
       - name: OWASP ZAP Security Scan
         run: |
           docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
