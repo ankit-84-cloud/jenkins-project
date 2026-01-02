@@ -45,10 +45,10 @@ jobs:
           tar -xzf k6-v*-linux-amd64.tar.gz
           sudo mv k6-v*/k6 /usr/local/bin/
 
-      - - name: Docker Login
-  if: ${{ secrets.dckr_pat_ju2W7WMAbEgGRNk2LeFYxebs != '' && secrets.ankitkashyap845438 != '' }}
-  run: echo "${{ secrets.dckr_pat_ju2W7WMAbEgGRNk2LeFYxebs }}" | docker login -u "${{ secrets.ankitkashyap845438 }}" --password-stdin- name: Docker Login
- " --password-stdinv
+      - name: Docker Login
+        if: ${{ secrets.dckr_pat_ju2W7WMAbEgGRNk2LeFYxebs != '' && secrets.ankitkashyap845438 != '' }}
+        run: |
+           echo "${{ secrets.dckr_pat_ju2W7WMAbEgGRNk2LeFYxebs }}" | docker login -u "${{ secrets.ankitkashyap845438 }}" --password-stdin
       - name: OWASP ZAP Security Scan
         run: |
           docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
