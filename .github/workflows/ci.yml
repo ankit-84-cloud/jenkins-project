@@ -27,6 +27,13 @@ jobs:
             tar -xzf k6-v*-linux-amd64.tar.gz
             sudo mv k6-v*/k6 /usr/local/bin/
 
+
+
+      - name: OWASP ZAP Security Scan
+        run: |
+              docker run -t owasp/zap2docker-stable zap-baseline.py \
+              -t http://localhost:3000
+
       - name: Install Dependencies
         run: npm install
 
