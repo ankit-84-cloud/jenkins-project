@@ -32,9 +32,6 @@ jobs:
           nohup node index.js &  # Run in background so k6 and ZAP can access it
           sleep 5                # Give server time to start
 
-      - name: Run Performance Test
-        run: k6 run loadtest.js
-
       - name: Install k6
         run: |
           curl -s https://api.github.com/repos/grafana/k6/releases/latest |
@@ -45,10 +42,13 @@ jobs:
           tar -xzf k6-v*-linux-amd64.tar.gz
           sudo mv k6-v*/k6 /usr/local/bin/
 
+      - name: Run Performance Test
+        run: k6 run loadtest.js
+
       - name: Docker Login
-        if: ${{ secrets.dckr_pat_ju2W7WMAbEgGRNk2LeFYxebs != '' && secrets.ankitkashyap845438 != '' }}
+        if: ${{ secrets.docker login -u ankitkashyap845438 != '' && secrets.DOCKER_TOKEN != '' }}
         run: |
-           echo "${{ secrets.dckr_pat_ju2W7WMAbEgGRNk2LeFYxebs }}" | docker login -u "${{ secrets.ankitkashyap845438 }}" --password-stdin
+            echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.docker login -u ankitkashyap845438 }}" --password-stdin
       - name: OWASP ZAP Security Scan
         run: |
           docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
