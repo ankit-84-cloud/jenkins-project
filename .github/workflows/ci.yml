@@ -33,6 +33,9 @@ jobs:
         run: |
               docker run -t owasp/zap2docker-stable zap-baseline.py \
               -t http://localhost:3000
+              
+      - name: SonarQube Scan
+        run: sonar-scanner
 
       - name: Install Dependencies
         run: npm install
