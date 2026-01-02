@@ -17,6 +17,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+      - name: Install k6
+        run: |
+            curl -s https://api.github.com/repos/grafana/k6/releases/latest |
+            grep "browser_download_url.*k6-v.*-linux-amd64.tar.gz" |
+            cut -d : -f 2,3 |
+            tr -d \" |
+            wget -qi -
+            tar -xzf k6-v*-linux-amd64.tar.gz
+            sudo mv k6-v*/k6 /usr/local/bin/
 
       - name: Install Dependencies
         run: npm install
