@@ -21,9 +21,12 @@ jobs:
         with:
           node-version: 18
       - name: Docker Login
-        if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_TOKEN != '' }}
         run: |
-           echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          if [ -n "${{ secrets.DOCKER_USERNAME }}" ] && [ -n "${{ secrets.DOCKER_TOKEN }}" ]; then
+            echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          else
+            echo "Docker credentials not provided. Skipping Docker login."
+          fi
 
       - name: Install Dependencies
         run: npm install
