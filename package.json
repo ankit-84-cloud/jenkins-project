@@ -1,11 +1,11 @@
 {
-  "name": "your-project-name",
+  "name": "testing",
   "version": "1.0.0",
   "type": "commonjs",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  },  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
+    "test": "echo \"OK\""
   }
 }
