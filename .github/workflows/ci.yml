@@ -17,9 +17,9 @@ jobs:
         with:
           node-version: 18
       - name: Install Dependencies
-      - run: npm install
+        run: npm install
 
       - name: Run Application
-      - run: node index.js
+        run: node index.js
       
   
